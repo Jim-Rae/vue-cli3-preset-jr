@@ -1,0 +1,28 @@
+{
+  "useConfigFiles": false,
+  "router": true,
+  "routerHistoryMode": false,
+  "vuex": true,
+  "cssPreprocessor": "dart-sass",
+  "plugins": {
+    "@vue/cli-plugin-babel": {},
+    "@vue/cli-plugin-eslint": {
+      "config": "standard",
+      "lintOn": [
+        "save",
+        "commit"
+      ]
+    }
+  },
+  "configs": {
+    "postcss": {
+      "plugins": {
+        "autoprefixer": {}
+      }
+    },
+    "browserslist": [
+      "> 1%",
+      "last 2 versions"
+    ]
+  }
+}

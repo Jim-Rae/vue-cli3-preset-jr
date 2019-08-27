@@ -1,0 +1,23 @@
+{
+  "name": "vue-cli3-preset-jr",
+  "version": "1.0.0",
+  "description": "vue-cli3 preset",
+  "main": "./generator/index.js",
+  "scripts": {
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Jim-Rae/vue-cli3-preset-jr.git"
+  },
+  "keywords": [
+    "vue-cli3",
+    "preset"
+  ],
+  "author": "Jim Rae",
+  "license": "MIT",
+  "devDependencies": {
+    "vuepress": "^1.0.3"
+  }
+}
