@@ -1,4 +1,4 @@
-# <%= projectName  %>
+# <%= rootOptions.projectName  %>
 
 ## Project setup
 ```

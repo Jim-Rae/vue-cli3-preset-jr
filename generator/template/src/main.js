@@ -3,6 +3,10 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import api from './api'
+import './assets/css/global/index.scss'
+<%_ if (options.element) { _%>
+import './assets/js/element'
+<%_ } _%>
 
 Vue.config.productionTip = false
 

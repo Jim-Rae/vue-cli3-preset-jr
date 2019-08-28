@@ -1,0 +1,23 @@
+// @author: liuqiao;
+// @date: 2019-03-11;
+// @description: 辅助函数
+
+//去除数字单位
+// $number * 0 会带上$number单位，所以$number * 0 + 1也会带上单位，再相除，单位没了
+@function g-strip-units($number){
+    @return $number / ($number * 0 + 1);
+}
+
+// 替换字符串末尾单位
+// return 返回的类型会是字符串
+@function g-strip-unit($number){
+	$unit: unit($number);
+	$len: str-length($unit);
+	
+	$str: '' + $number;
+	@if $unit{
+		@return str-slice($str, 0, -($len + 1));
+	}@else{
+		@return $str;
+	}
+}

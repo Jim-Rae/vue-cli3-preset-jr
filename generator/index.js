@@ -13,6 +13,17 @@ module.exports = (api, options, rootOptions) => {
     }
   })
 
+  if (options.element) {
+    api.extendPackage({
+      dependencies: {
+        "element-ui": "^2.11.1"
+      },
+      devDependencies: {
+        'babel-plugin-component': '^1.1.1'
+      }
+    })
+  }
+
   // 删除 vue-cli3 默认目录
   api.render(files => {
     Object.keys(files)
@@ -21,7 +32,7 @@ module.exports = (api, options, rootOptions) => {
   })
 
   // 生成项目模板
-  api.render('./template', {projectName: api.generator.pkg.name})
+  api.render('./template')
 
   // 阻止默认README.md文件生成
   api.onCreateComplete(() => {
