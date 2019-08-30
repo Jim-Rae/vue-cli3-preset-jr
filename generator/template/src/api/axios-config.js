@@ -3,15 +3,18 @@
 import axios from 'axios'
 
 const http = axios.create({
-  baseURL: process.env.NODE_ENV === 'production' ? 'http://www.production.com' : '',
+  baseURL: process.env.NODE_ENV === 'production' ? 'http://www.jimrae.com' : '',
   timeout: 10000
 })
 
 // 请求拦截
 http.interceptors.request.use(config => {
-  // 加入请求时间戳
-  if (!config.params) config.params = {}
-  config.params.t = Date.now()
+  const method = config.method.toLowerCase()
+  // 加入请求时间戳，避免从缓存中拿数据
+  if (method === 'get') {
+    if (!config.params) config.params = {}
+    config.params._t = Date.now()
+  }
   return config
 }, error => {
   return Promise.reject(error)

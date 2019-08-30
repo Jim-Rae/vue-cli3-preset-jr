@@ -10,6 +10,7 @@ module.exports = (api, options, rootOptions) => {
     dependencies: {
       "axios": "^0.19.0",
       "qs": "^6.8.0",
+      "vuex-router-sync": "^5.0.0"
     }
   })
 

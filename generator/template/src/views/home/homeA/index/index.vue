@@ -8,6 +8,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
   name: 'index',
   data () {
@@ -16,6 +18,12 @@ export default {
     }
   },
   async created () {
+    await this.$_api.login({
+      username: 'admin',
+      password: 'admin'
+    })
+    console.log('userInfo', await this.getUserInfo())
+
     <%_ if (options.element) { _%>
     this.$alert('这是一段内容', '标题名称', {
       confirmButtonText: '确定',
@@ -46,6 +54,14 @@ export default {
     } catch (error) {
       console.log(error)
     }
+
+    this.getRouteAndRouter()
+  },
+  methods: {
+    ...mapActions({
+      getUserInfo: 'user/getUserInfo',
+      getRouteAndRouter: 'user/getRouteAndRouter'
+    })
   }
 }
 </script>
