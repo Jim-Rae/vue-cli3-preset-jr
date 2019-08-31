@@ -33,7 +33,7 @@ class GlobalRouter {
       // 默认路由
       {
         path: '/',
-        redirect: '/home/homeA/index'
+        redirect: '/index/home/homeA'
       }
     ]
     this._routes.push(...defaultPath)

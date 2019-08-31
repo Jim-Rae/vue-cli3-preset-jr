@@ -1,12 +1,12 @@
 <template>
-  <div class="about">
-    这是一个about页
+  <div class="login">
+    这是login
   </div>
 </template>
 
 <script>
 export default {
-  name: 'about'
+  name: 'login'
 }
 </script>
 

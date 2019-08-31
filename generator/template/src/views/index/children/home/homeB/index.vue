@@ -1,12 +1,12 @@
 <template>
-  <div class="sub-a">
-    这是subA
+  <div class="home-b">
+    这是homeB
   </div>
 </template>
 
 <script>
 export default {
-  name: 'subA'
+  name: 'homeB'
 }
 </script>
 

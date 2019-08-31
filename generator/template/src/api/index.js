@@ -37,7 +37,7 @@ const api = {
   postData: data => http.post('/api/postData', data),
 
   // POST方法示例(x-www-form-urlencoded)
-  postData2: data => http.post('/api/postData', qs.stringify(data)),
+  postDataByxForm: data => http.post('/api/postData', qs.stringify(data)),
 
   // POST方法示例(form-data)
   // 直接传一个FormData对象即可

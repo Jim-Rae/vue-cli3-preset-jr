@@ -1,12 +1,13 @@
 <template>
-  <div class="about-a">
-    这是aboutA
+  <div class="index">
+    这是Index
+    <router-view/>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'aboutA'
+  name: 'index'
 }
 </script>
 

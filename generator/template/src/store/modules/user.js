@@ -20,7 +20,7 @@ const mutations = {
 const actions = {
   getRouteAndRouter ({rootState}) {
     console.log(rootState.route)
-    router.push({name: 'home.homeA.subA'})
+    router.push({ name: 'index.about.index' })
   },
 
   async getUserInfo ({ commit }) {
@@ -30,7 +30,7 @@ const actions = {
         commit('setUserInfo', res.data)
         return res.data
       } else {
-        router.push({name: 'home/homeA/subA'})
+        router.push({ name: 'login' })
       }
     } catch (error) {
       console.log(error)
