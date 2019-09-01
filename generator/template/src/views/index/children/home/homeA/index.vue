@@ -23,7 +23,7 @@ export default {
 
     this.getRouteAndRouter()
 
-    <%_ if (options.element) { _%>
+    <%_ if (options.type === 'pc') { _%>
     this.$alert('这是一段内容', '标题名称', {
       confirmButtonText: '确定',
       callback: action => {

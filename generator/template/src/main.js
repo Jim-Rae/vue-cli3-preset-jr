@@ -5,7 +5,7 @@ import store from './store'
 import { sync } from 'vuex-router-sync'
 import api from './api'
 import './assets/css/global/index.scss'
-<%_ if (options.element) { _%>
+<%_ if (options.type === 'pc') { _%>
 import './assets/js/element'
 <%_ } _%>
 

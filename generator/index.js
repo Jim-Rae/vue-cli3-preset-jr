@@ -14,7 +14,7 @@ module.exports = (api, options, rootOptions) => {
     }
   })
 
-  if (options.element) {
+  if (options.type === 'pc') {
     api.extendPackage({
       dependencies: {
         "element-ui": "^2.11.1"

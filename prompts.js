@@ -1,8 +1,18 @@
 module.exports = [
   {
-    type: 'confirm',
-    name: 'element',
-    message: '是否需要引入element-ui?',
-    default: true,
+    name: 'type',
+    type: 'list',
+    message: '请选择模板类型（默认：PC端）',
+    choices: [
+      {
+        name: 'PC端',
+        value: 'pc'
+      },
+      {
+        name: '移动端',
+        value: 'm'
+      }
+    ],
+    default: 'pc'
   }
 ]
