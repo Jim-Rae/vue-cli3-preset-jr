@@ -4,10 +4,13 @@ import router from './router'
 import store from './store'
 import { sync } from 'vuex-router-sync'
 import api from './api'
-import './assets/css/global/index.scss'
+import './components'
 <%_ if (options.type === 'pc') { _%>
 import './assets/js/element'
 <%_ } _%>
+
+// 引入全局样式
+import './assets/css/global/index.scss'
 
 Vue.config.productionTip = false
 

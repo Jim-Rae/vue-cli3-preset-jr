@@ -2,7 +2,7 @@ module.exports = [
   {
     name: 'type',
     type: 'list',
-    message: '请选择模板类型（默认：PC端）',
+    message: '请选择模板类型',
     choices: [
       {
         name: 'PC端',

@@ -4,13 +4,26 @@
  */
 
 import Vue from 'vue'
-import { Button, MessageBox, Message } from 'element-ui'
 import '../css/theme/element-var.scss'
+import {
+  Button,
+  MessageBox,
+  Message,
+  Container,
+  Header,
+  Aside,
+  Main,
+} from 'element-ui'
 
 Vue.use(Button)
+Vue.use(Container)
+Vue.use(Header)
+Vue.use(Aside)
+Vue.use(Main)
 
 Vue.prototype.$msgbox = MessageBox
 Vue.prototype.$alert = MessageBox.alert
 Vue.prototype.$confirm = MessageBox.confirm
 Vue.prototype.$prompt = MessageBox.prompt
 Vue.prototype.$message = Message
+

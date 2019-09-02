@@ -4,6 +4,7 @@
     <div>
       <img :src="imgUrl" width="200">
     </div>
+    <component-test/>
   </div>
 </template>
 
