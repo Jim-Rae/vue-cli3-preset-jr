@@ -1,6 +1,6 @@
 // 搜索当前目录下符合命名的 vue 组件，注册为全局Vue组件
 
-import Vue from 'vue';
+import Vue from 'vue'
 
 const components = require.context('./', true, /\.vue$/)
 
