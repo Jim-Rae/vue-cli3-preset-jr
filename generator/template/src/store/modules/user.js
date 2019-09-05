@@ -6,9 +6,8 @@ const state = {
 }
 
 const getters = {
-  userType: state => {
-    return state.userInfo.type
-  }
+  userType: state => state.userInfo.type,
+  username: state => state.userInfo.username
 }
 
 const mutations = {
@@ -18,9 +17,8 @@ const mutations = {
 }
 
 const actions = {
-  getRouteAndRouter ({rootState}) {
+  getRouteAndRouter ({ rootState }) {
     console.log(rootState.route)
-    router.push({ name: 'index.about.index' })
   },
 
   async getUserInfo ({ commit }) {
@@ -35,9 +33,22 @@ const actions = {
     } catch (error) {
       console.log(error)
     }
+  },
+
+  async logout ({ commit }) {
+    try {
+      const res = await Api.logout()
+      if (res.status) {
+        commit('setUserInfo', {})
+        router.push({ name: 'login' })
+      } else {
+        console.log(res.message)
+      }
+    } catch (error) {
+      console.log(error)
+    }
   }
 }
-
 
 export default {
   namespaced: true,

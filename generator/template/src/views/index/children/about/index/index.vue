@@ -1,6 +1,5 @@
 <template>
   <awesome-scrollbar-box class="about">
-    这是about
     <el-button type="success" @click="add">添加</el-button>
     <el-button type="danger" @click="del">删除</el-button>
     <div
@@ -18,7 +17,7 @@ export default {
   data () {
     return {
       imgUrl: null,
-      list: [1,2,3]
+      list: [1, 2, 3]
     }
   },
   created () {

@@ -5,6 +5,12 @@ export default [
   {
     path: '/index/about/index',
     name: 'index.about.index',
-    component: Index
+    component: Index,
+    meta: {
+      breadcrumb: {
+        title: '相关信息',
+        route: ['index.about.index']
+      }
+    }
   }
 ]

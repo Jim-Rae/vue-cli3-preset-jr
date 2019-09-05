@@ -1,5 +1,6 @@
 import { importAll } from '@/utils/routerHelper.js'
 import Index from './index'
+import Store from '@/store'
 
 // 加载子路由
 const ctx = require.context('./children', true, /childRouter.js$/)
@@ -10,7 +11,8 @@ export default {
   component: Index,
   children: childRoutes,
   // 路由独享守卫
-  beforeEnter (to, from, next) {
+  async beforeEnter (to, from, next) {
+    await Store.dispatch('user/getUserInfo');
     next()
   }
 }

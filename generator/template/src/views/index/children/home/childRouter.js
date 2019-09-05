@@ -6,11 +6,23 @@ export default [
   {
     path: '/index/home/homeA',
     name: 'index.home.homeA',
-    component: HomeA
+    component: HomeA,
+    meta: {
+      breadcrumb: {
+        title: 'HomeA',
+        route: ['index.home.homeA']
+      }
+    }
   },
   {
     path: '/index/home/homeB',
     name: 'index.home.homeB',
-    component: HomeB
+    component: HomeB,
+    meta: {
+      breadcrumb: {
+        title: 'HomeB',
+        route: ['index.home.homeA', 'index.home.homeB']
+      }
+    }
   }
 ]

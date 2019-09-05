@@ -1,6 +1,6 @@
-// @author:		liuqiao
-// @date:		2018-12-07
-// @description 定义布局相关的混合器
+/**
+ * @Desc 定义布局相关的混合器
+ */
 
 // 等高布局
 @mixin g-layout-equal-height($child-selector){
@@ -39,7 +39,7 @@
 		@content;
 	}
 }
- 
+
 //行内块：垂直居中
 @mixin g-layout-inline-block-vcenter($child-selector){
 	%vcenter{
@@ -83,25 +83,82 @@
 	}
 }
 
-// 左右上下居中
-@mixin g-layout-center($child-selector, $options: ()){
-	@include g-layout-rel-abs($child-selector, (
-			left: 50%,
-			top: 50%
-		)){
-		transform: translate(-50%, -50%);
-		@content;
-	};
+
+/** transform方式居中
+ * @Author: JimRae
+ * @Date: 2019-09-05
+ *
+ * @param $child-selector 子元素选择器
+ * @param $axis 需要居中的轴线，x: 水平居中、y: 垂直居中、both: 水平垂直居中
+ */
+@mixin g-layout-center-transform ($child-selector, $axis: 'both') {
+  @if $axis == 'both' {
+    @include g-layout-rel-abs($child-selector, (
+      left: 50%,
+      top: 50%
+    )){
+      transform: translate(-50%, -50%);
+      @content;
+    };
+  } @else if $axis == 'x' {
+    @include g-layout-rel-abs($child-selector, (
+      left: 50%,
+    )){
+      transform: translate(-50%, 0);
+      @content;
+    };
+  } @else if $axis == 'y' {
+    @include g-layout-rel-abs($child-selector, (
+      top: 50%
+    )){
+      transform: translate(0, -50%);
+      @content;
+    };
+  }
 }
 
 
-
+/** margin方式居中
+ * @Author: JimRae
+ * @Date: 2019-09-05
+ *
+ * @param $child-selector 子元素选择器
+ * @param $width 子元素宽度
+ * @param $height 子元素高度
+ * @param $axis 需要居中的轴线，x: 水平居中、y: 垂直居中、both: 水平垂直居中
+ */
+ @mixin g-layout-center-margin ($child-selector, $width, $height, $axis: 'both') {
+  @if $axis == 'both' {
+    @include g-layout-rel-abs($child-selector, (
+      left: 50%,
+      top: 50%
+    )){
+      margin-left: - $width / 2;
+      margin-top: - $height / 2;
+      @content;
+    };
+  } @else if $axis == 'x' {
+    @include g-layout-rel-abs($child-selector, (
+      left: 50%,
+    )){
+      margin-left: - $width / 2;
+      @content;
+    };
+  } @else if $axis == 'y' {
+    @include g-layout-rel-abs($child-selector, (
+      top: 50%
+    )){
+      margin-top: - $height / 2;
+      @content;
+    };
+  }
+}
 
 
 
 // 设置字体大小，颜色
 @mixin g-set-font($font-size: 14px, $color: #000, $font-weight: normal){
-	
+
 	font: {
 		size: $font-size;
 		weight: $font-weight;
@@ -125,7 +182,7 @@
 @mixin g-full-percent($properties...){
 	@each $prop in $properties{
 		#{$prop}: 100%;
-	}	
+	}
 }
 
 //设置media
@@ -135,7 +192,7 @@
 		html, body{
 			width: max-width;
 		}
-	}	
+	}
 }
 
 
@@ -144,13 +201,13 @@
 	@media all and (min-width:0\0) and (min-resolution:.001dpcm){
 		@content;
 	}
-	
+
 }
 
 // 设置高度，行高
 @mixin g-height-lineheight($height: null, $line-height: null){
 	height: $height;
-	line-height: if($line-height, $line-height, $height)	
+	line-height: if($line-height, $line-height, $height)
 }
 
 @mixin g-set-position($position: relative, $left: -1, $right: -1, $top: -1, $bottom: -1 ){
@@ -221,7 +278,7 @@
 	text-overflow: ellipsis;
 	@if not $width == null{
 		width: $width;
-	} 
+	}
 	@if not $substract == null{
 		width: calc(100% - #{$substract});
 	}
@@ -319,7 +376,7 @@
     height: $height;
     background-color: $outColor;
   }
- 
+
   /*定义滚动条轨道 内阴影+圆角*/
   &::-webkit-scrollbar-track {
     @if ($shadow!=null) {
@@ -330,7 +387,7 @@
     }
     background-color: $outColor;
   }
- 
+
   /*定义滑块 内阴影+圆角*/
   &::-webkit-scrollbar-thumb {
     @if ($shadow!=null) {
@@ -343,4 +400,3 @@
     border: 1px solid $innerColor;
   }
 }
-

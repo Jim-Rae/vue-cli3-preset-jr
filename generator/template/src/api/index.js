@@ -46,7 +46,10 @@ const api = {
   login: data => http.post('/api/login', data),
 
   // 获取用户信息
-  getUserInfo: () => http.get('/api/getUserInfo')
+  getUserInfo: () => http.get('/api/getUserInfo'),
+
+  // 退登
+  logout: () => http.get('/api/logout')
 
 }
 

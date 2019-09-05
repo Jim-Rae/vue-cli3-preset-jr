@@ -19,11 +19,9 @@ export default {
       username: 'admin',
       password: 'admin'
     })
-    console.log('userInfo', await this.getUserInfo())
 
     this.getRouteAndRouter()
 
-    <%_ if (options.type === 'pc') { _%>
     this.$alert('这是一段内容', '标题名称', {
       confirmButtonText: '确定',
       callback: action => {
@@ -33,7 +31,6 @@ export default {
         })
       }
     })
-    <%_ } _%>
   },
   methods: {
     ...mapActions({
