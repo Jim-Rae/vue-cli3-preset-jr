@@ -16,7 +16,7 @@ module.exports = (api, options, rootOptions) => {
     }
   })
 
-  if (options.type === 'pc') {
+  // if (options.type === 'pc') {
     api.extendPackage({
       dependencies: {
         "element-ui": "^2.11.1"
@@ -25,7 +25,7 @@ module.exports = (api, options, rootOptions) => {
         'babel-plugin-component': '^1.1.1'
       }
     })
-  }
+  // }
 
   // 删除 vue-cli3 默认目录
   api.render(files => {
