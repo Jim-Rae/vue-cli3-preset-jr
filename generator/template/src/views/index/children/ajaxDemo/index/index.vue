@@ -1,23 +1,23 @@
 <template>
-  <awesome-scrollbar-box class="about">
-    <el-button type="success" @click="add">添加</el-button>
-    <el-button type="danger" @click="del">删除</el-button>
-    <div
-      v-for="(item, index) in list"
-      :key="index"
-    >
-      <img :src="imgUrl" width="200">
-    </div>
-  </awesome-scrollbar-box>
+  <div class="ajax-demo">
+    <ul>
+      <li
+        v-for="(item, index) in list"
+        :key="index"
+      >
+        <p class="title">{{item.title}}</p>
+        <p><img :src="item.image" alt="image"></p>
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script>
 export default {
-  name: 'about',
+  name: 'ajaxDemo',
   data () {
     return {
-      imgUrl: null,
-      list: [1, 2, 3]
+      list: []
     }
   },
   created () {
@@ -36,7 +36,13 @@ export default {
       try {
         const res = await this.$_api.getList()
         console.log('list', res)
-        this.imgUrl = 'http://jimrae.top:3001' + res[0].image
+        this.list = res.map(item => {
+          return {
+            title: item.title,
+            image: 'http://jimrae.top:3001' + item.image
+          }
+        })
+        console.log(this.list)
       } catch (error) {
         console.log(error)
       }
@@ -68,7 +74,24 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.about {
-  height: 100%;
+@import '@/assets/scss/index';
+
+.ajax-demo {
+  text-align: center;
+
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+
+    li {
+      width: 400px;
+      margin: 20px;
+
+      .title {
+        @include g-set-font($g-fs-normal, $g-color-themegreen);
+        margin-bottom: 20px;
+      }
+    }
+  }
 }
 </style>

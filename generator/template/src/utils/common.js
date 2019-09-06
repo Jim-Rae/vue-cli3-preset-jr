@@ -6,7 +6,6 @@
  * @Desc 常用工具库
  */
 
-
 /**
  * 计算浏览器默认滚动条宽度
  * @method computeScrollBarWidth
@@ -35,8 +34,8 @@ const computeScrollBarWidth = () => {
  * @param {Array<String>} keysArr 过滤要拷贝的字段
  */
 const fastCopy = (obj, keysArr) => {
-  const clone = window.JSON.parse( window.JSON.stringify(obj) )
-  if(!keysArr){
+  const clone = window.JSON.parse(window.JSON.stringify(obj))
+  if (!keysArr) {
     return clone
   }
 

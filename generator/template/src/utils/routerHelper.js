@@ -13,27 +13,27 @@ class RouterHelper {
   // 获取扁平化后的路由
   // fresh为true表示不使用缓存，每次重新求值一次
   getFlattenRoutes (fresh = false) {
-    if(this.routes && !fresh) return this.routes
+    if (this.routes && !fresh) return this.routes
     this.routes = this.flattenRoutes()
-		return this.routes
+    return this.routes
   }
 
   // 打平路由
-	flattenRoutes (routes) {
-		const rs = []
-		// 总路由
-		routes = routes || fastCopy(RouteConfig.options.routes)
-		routes.forEach(r => {
-			// 取出除了 children component以外的选项
-			const {children, component, ...otherRouteCfg} = r
-			rs.push(otherRouteCfg)
-			if(children){
-				const childrenRoutes = this.flattenRoutes(children)
-				rs.push(...childrenRoutes)
-			}
-		})
-		return rs
-	}
+  flattenRoutes (routes) {
+    const rs = []
+    // 总路由
+    routes = routes || fastCopy(RouteConfig.options.routes)
+    routes.forEach(r => {
+      // 取出除了 children component以外的选项
+      const { children, component, ...otherRouteCfg } = r
+      rs.push(otherRouteCfg)
+      if (children) {
+        const childrenRoutes = this.flattenRoutes(children)
+        rs.push(...childrenRoutes)
+      }
+    })
+    return rs
+  }
 }
 
 export default new RouterHelper()

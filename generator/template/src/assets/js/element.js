@@ -4,7 +4,7 @@
  */
 
 import Vue from 'vue'
-import '../css/theme/element-var.scss'
+import '../scss/theme/element-var.scss'
 import {
   Button,
   MessageBox,

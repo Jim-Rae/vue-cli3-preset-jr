@@ -17,8 +17,8 @@ const mutations = {
 }
 
 const actions = {
-  getRouteAndRouter ({ rootState }) {
-    console.log(rootState.route)
+  getRouteInfo ({ rootState }) {
+    console.log('routeInfo: ', rootState.route)
   },
 
   async getUserInfo ({ commit }) {

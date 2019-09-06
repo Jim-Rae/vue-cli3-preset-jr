@@ -12,7 +12,7 @@ export default {
   children: childRoutes,
   // 路由独享守卫
   async beforeEnter (to, from, next) {
-    await Store.dispatch('user/getUserInfo');
+    await Store.dispatch('user/getUserInfo')
     next()
   }
 }

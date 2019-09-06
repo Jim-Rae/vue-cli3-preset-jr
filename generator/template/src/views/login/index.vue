@@ -43,7 +43,7 @@ export default {
     return {
       loginForm: {
         username: 'admin',
-        password: 'admin',
+        password: 'admin'
       },
       rules: {
         username: [
@@ -51,14 +51,14 @@ export default {
         ],
         password: [
           { required: true, message: '请输入密码', trigger: 'blur' }
-        ],
+        ]
       },
       showLogin: false,
       loading: false
     }
   },
-  mounted(){
-    this.showLogin = true;
+  mounted () {
+    this.showLogin = true
   },
   methods: {
     async login () {
@@ -71,7 +71,7 @@ export default {
         this.loading = false
         if (res.status) {
           this.$message.success('登录成功')
-          this.$router.push({name: 'index.about.index'})
+          this.$router.push({ name: 'index.breadcrumbDemo.index' })
         } else {
           this.$message.error(res.message)
         }
@@ -95,8 +95,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '@/assets/css/var';
-@import '@/assets/css/mixin/layout';
+@import '@/assets/scss/var';
+@import '@/assets/scss/mixin/layout';
 
 .login{
   width: 100%;
@@ -147,7 +147,6 @@ export default {
   }
 }
 
-
 .tip{
   font-size: 12px;
   color: red;
@@ -160,4 +159,3 @@ export default {
     opacity: 0;
 }
 </style>
-
