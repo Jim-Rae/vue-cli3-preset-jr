@@ -153,6 +153,11 @@ export default {
   .scroll-wrapper {
     height: 100%;
     overflow: auto;
+
+    &::-webkit-scrollbar {
+      width: 0;
+      height: 0;
+    }
   }
 
   .scrollbar-bar{
