@@ -9,8 +9,8 @@ export default {
     document.body.appendChild($vm.$el)
 
     const myPicker = {
-      init (title, values, callback) {
-        $vm.init(title, values, callback)
+      init (title, callback) {
+        $vm.init(title, callback)
       },
       show () {
         $vm.show()

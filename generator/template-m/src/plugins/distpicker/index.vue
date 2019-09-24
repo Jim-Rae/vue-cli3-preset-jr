@@ -73,7 +73,7 @@ export default {
   },
   methods: {
     getDistricts (code = DEFAULT_CODE) {
-      return DISTRICTS[code] || []
+      return DISTRICTS[code] || {}
     },
     getAreaCode (name) {
       for (let x in DISTRICTS) {
@@ -134,7 +134,7 @@ export default {
 
   .picker-toolbar{
     width: 100%;
-    height: 80px;
+    height: 100%;
     background-color: #f5f5f5;
     display: flex;
     justify-content: space-between;
