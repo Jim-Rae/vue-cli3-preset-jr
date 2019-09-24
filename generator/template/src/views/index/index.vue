@@ -106,23 +106,23 @@ export default {
     @include g-set-font( $g-fs-strong, $g-color-themegreen);
   }
 
-  @include g-layout-center-transform('.login-btn', 'y');
   .login-btn {
     @include g-set-font($g-fs-strong, $g-color-black);
     display: block;
     height: 60px;
     right: 40px;
+    @include g-layout-center-transform('y');
 
     &:hover {
       color: $g-color-themegreen;
     }
   }
 
-  @include g-layout-center-transform('.user-wrapper', 'y');
   .user-wrapper {
     display: block;
     height: 60px;
     right: 40px;
+    @include g-layout-center-transform('y');
 
     .user-info {
       @include g-set-font($g-fs-strong, $g-color-themegreen);

@@ -103,7 +103,6 @@ export default {
   height: 100vh;
   background-color: $g-color-themegreen;
 
-  @include g-layout-center-margin('.form-contianer', 350px, 220px, 'both');
   .form-contianer{
     width: 350px;
     height: 220px;
@@ -111,6 +110,7 @@ export default {
     border-radius: 5px;
     text-align: center;
     background-color: #fff;
+    @include g-layout-center-margin(350px, 220px, 'both');
 
     .submit-btn{
       width: 100%;

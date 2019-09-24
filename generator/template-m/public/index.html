@@ -10,7 +10,7 @@
       <meta http-equiv="refresh" content="0; url=/ie.html">
     <![endif]-->
 
-    <!-- 判断是否为移动端设备，如果是则跳转到移动端url -->
+    <!-- 判断是否为非移动端设备，如果是则跳转到pc端url -->
     <script>
       function browserRedirect() {
         var sUserAgent = navigator.userAgent.toLowerCase();
@@ -22,8 +22,8 @@
         var bIsAndroid = sUserAgent.match(/android/i) == "android";
         var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
         var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
-        if (bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM) {
-          // 跳转到你的移动端url
+        if (!(bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM)) {
+          // 跳转到你的pc端url
           window.location.href = "https://baidu.com"
         }
       }

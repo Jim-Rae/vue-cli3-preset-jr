@@ -1,0 +1,78 @@
+@import '../index.scss';
+
+// 表单自适应布局，不再使用 label-width 属性声明
+$form-label-width: 150px !default;
+.form {
+	// 布局
+    max-width: 800px;
+    @include g-mg-lf(auto, 60px, 20px);
+    @include g-mg-rt(auto, 60px, 20px);
+	@include g-width(80%, calc(100% - 120px), calc(100% - 40px));
+
+	.el-form-item__label {
+		@include g-width($form-label-width, 100%);
+		@include g-media-attr((
+			attr: 'text-align',
+			md: right,
+			sm: left
+		));
+	}
+
+	.el-form-item{
+		margin: 22px auto ;
+	}
+
+	.el-form-item__content {
+        @include g-media-attr((
+            attr: 'overflow',
+            md: hidden, // 自适应剩余宽度
+            sm: inherit
+        ));
+	}
+
+	.g-divide-line{
+		line-height: 2;
+		// 缩进和上方的label一样宽
+		@include g-media-attr((
+			attr: 'text-indent',
+			md: $form-label-width,
+			sm: 0
+		));
+		@include g-set-font($font-size: $g-fs-small, $color: $g-color-gray);
+		border-bottom: 1px dashed rgba($g-color-yellow-light, .3);
+
+		&.no-line{
+			border: none;
+		}
+	}
+
+	// 头像
+	.avatar {
+		width: 100px;
+		height: 100px;
+		border-radius: 50%;
+	}
+
+	// 标签
+	.el-tag {
+		margin-right: 10px;
+	}
+
+	.button-new-tag {
+		height: 32px;
+		line-height: 30px;
+		padding-top: 0;
+		padding-bottom: 0;
+	}
+	.input-new-tag {
+		width: 90px;
+		vertical-align: bottom;
+	}
+}
+
+// 文本溢出隐藏，需要设定 width ，建议设置元素 title 属性
+.text-ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+	white-space: nowrap;
+}

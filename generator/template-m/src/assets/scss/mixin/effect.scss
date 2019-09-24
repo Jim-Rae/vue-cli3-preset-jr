@@ -1,0 +1,135 @@
+// @author:		liuqiao
+// @date:		2019-01-09
+// @description 定义效果相关的混合器
+@import './../var';
+@import './layout';
+@import './func';
+
+
+
+// hover背景色从左到右变化
+@mixin g-hover-bgcolor-effect($background-color: $g-color-yellow-hover, $color: $g-color-white, $transition-duration: .24s){
+	&{
+		//提高z-index
+		z-index: 2;
+		@include g-set-position($position: relative);
+	}
+	&::before{
+		content: '';
+		@include g-set-position($position: absolute, $left: 0, $top: 0);
+		//降低z-index，使遮罩不覆盖标签里的文字
+		z-index: -1;
+		width: 0;
+		height: 100%;
+		background-color: $background-color;
+		transition: all ease-in-out $transition-duration;
+	}
+	&:hover{
+		color: $color;
+		&::before{
+			width: 100%;
+		}
+	}
+}
+
+//中间到两边的效果
+@mixin g-center-to-side-effect($height: 3px, $bottom: -7px, $background-color: $g-color-yellow, $transition-duration: .3s){
+	&{
+		@include g-set-position($position: relative);
+	}
+	&::after{
+		content: '';
+		@include g-set-position($position: absolute, $left: 50%, $bottom: $bottom);
+		width: 0;
+		height: $height;
+		// -ms-transform: translateX(-50%);
+		transform: translateX(-50%);
+		// margin的百分比相对于父元素的宽度而言。但是这里父元素和::after宽度一样宽，所以50%是相对父元素（和相对::after本身一样的）
+		margin-left: -50%\9\0;
+		transition: width $transition-duration ease;
+		background-color: $background-color;
+	}
+	&.active{
+		&::after{
+			width: 100%;
+		}
+	}
+}
+
+// 给元素添加遮罩
+@mixin g-add-mask($color: rgba(11, 17, 36, .7), $z-index: null){
+	&{
+		@include g-set-position($position: relative);
+	}
+	&::before{
+		@include g-set-position($position: absolute, $left: 0, $top: 0);
+		display: block;
+		@if $z-index  {z-index: $z-index; }
+		content: ' ';
+		width: 100%;
+		height: 100%;
+		background-color: $color;
+	}
+}
+
+//正常来说：要定义keyframes，然后再使用动画的元素里aniamation: keyframes 这种方式来设置动画;
+//存在的问题：定义和使用动画在两个地方，不好管理与维护
+//这个mixin g-一个地方定义和使用
+@mixin g-easy-animation($options: ()) {
+  // 合并默认参数
+  $options: map-merge((
+    animation-name: animation,
+    animation-duration: 1,
+    animation-delay: 0,
+    animation-timing-function: linear,
+    animation-direction: normal,
+    animation-iteration-count: infinite
+  ), $options);
+  // 名字
+  $name: map-get($options, animation-name);
+  // keyframes动作帧（map形式）
+  $kf: map-get($options, keyframes);
+  // 帧长度
+  $kfLength: length($kf);
+  // 持续时间
+  $duration: map-get($options, animation-duration);
+
+
+
+  $waitTime: map-get($options, animation-delay);
+  // 速度函数
+  $timingFunction: map-get($options, animation-timing-function);
+  // 动画方向
+  $direction: map-get($options, animation-direction);
+
+  // 动画次数
+  $iterationCount: map-get($options, animation-iteration-count);
+  //下面each的计数器
+  $counter: 1;
+
+  @keyframes #{$name} {
+    // 遍历出每一帧(是map)
+    @each $frame, $prop in $kf {
+
+      $percentage:  $frame * $duration / ($waitTime + $duration);
+      #{$percentage}% {
+      	// 每一帧里的属性设置（也是map）
+        @each $k, $v in $prop {
+          #{$k}: #{$v}
+        }
+      }
+      // 如果设置了等待时间，最后一帧设置为100%的情形
+      @if $counter == $kfLength and $waitTime > 0 {
+        100% {
+          @each $k, $v in $prop {
+            #{$k}: #{$v}
+          }
+        }
+      }
+      $counter: $counter + 1;
+    }
+  }
+
+  animation: #{$name} #{$duration}s #{$timingFunction} #{$iterationCount} #{$direction};
+
+}
