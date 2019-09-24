@@ -22,7 +22,12 @@ module.exports = (api, options, rootOptions) => {
       },
       devDependencies: {
         'babel-plugin-component': '^1.1.1'
-      }
+      },
+      postcss: {
+        "plugins": {
+          "autoprefixer": {}
+        }
+      },
     })
   } else {
     // 移动端配置
