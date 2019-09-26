@@ -13,6 +13,7 @@
           :model="loginForm"
           :rules="rules"
           ref="loginForm"
+          @submit.native.prevent
         >
           <el-form-item prop="username">
             <el-input
@@ -28,7 +29,13 @@
               autocomplete="on"></el-input>
           </el-form-item>
           <el-form-item>
-            <el-button type="primary" @click="submitForm()" class="submit-btn">登录</el-button>
+            <el-button
+              type="primary"
+              @click="submitForm"
+              class="submit-btn"
+              native-type="submit">
+              登录
+            </el-button>
           </el-form-item>
         </el-form>
       </section>
