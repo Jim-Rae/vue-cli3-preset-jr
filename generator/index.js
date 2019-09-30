@@ -87,7 +87,7 @@ module.exports = (api, options, rootOptions) => {
   })
 
   // 生成项目模板
-  api.render('./template-m')
+  api.render(options.type === 'pc' ? './template' : './template-m')
 
   // 阻止默认README.md文件生成
   api.onCreateComplete(() => {
