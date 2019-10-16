@@ -71,20 +71,19 @@ export default {
     async login () {
       try {
         this.loading = true
-        const res = await this.$_api.login({
+        await this.$_api.login({
           username: this.loginForm.username,
           password: this.loginForm.password
         })
         this.loading = false
-        if (res.status) {
-          this.$message.success('登录成功')
-          this.$router.push({ name: 'index.breadcrumbDemo.index' })
-        } else {
-          this.$message.error(res.message)
-        }
+        this.$message.success('登录成功')
+        this.$router.push({ name: 'index.breadcrumbDemo.index' })
       } catch (error) {
         this.loading = false
-        console.log(error)
+        if (error.message) {
+          this.$message.error(error.message)
+        }
+        console.error(error)
       }
     },
     submitForm () {

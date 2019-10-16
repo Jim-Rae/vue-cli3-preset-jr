@@ -1,6 +1,7 @@
 // Axios详细配置请阅读 https://www.kancloud.cn/yunye/axios/234845
 
 import axios from 'axios'
+import router from '@/router'
 
 const http = axios.create({
   baseURL: process.env.NODE_ENV === 'production' ? 'http://www.jimrae.com' : '',
@@ -21,15 +22,23 @@ http.interceptors.request.use(config => {
 })
 
 // 返回拦截
-http.interceptors.response.use(response => {
+http.interceptors.response.use((response) => {
   // 对接口返回做统一处理, 这里要跟后台约定好接口异常返回的数据格式
-  const codeMap = {
-    '401': { isInvalidToken: true },
-    '404': { message: '接口不存在' },
-    '500': { message: '服务器失联了，请稍候再试' },
-    '5001': { message: '服务器失联了，请稍候再试' }
+  /* 下面处理仅针对返回格式如下的后台接口
+   * {
+   *    code: 200 | 400 | 401 | ...,
+   *    data: {},
+   *    message: "信息说明
+   * }
+  */
+  switch (response.data.code) {
+    /* eslint-disable */
+    case 200: return Promise.resolve(response.data.data)
+    case 400: return Promise.reject({ message: response.data.message })
+    case 401: router.push({ name: 'login' }); return Promise.reject()
+    default: return Promise.reject({ message: '服务器失联了，请稍候再试' })
+    /* eslint-enable */
   }
-  return codeMap[response.data.code] ? Promise.reject(codeMap[response.data.code]) : Promise.resolve(response.data)
 }, error => {
   return Promise.reject(error)
 })

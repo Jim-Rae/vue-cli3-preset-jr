@@ -34,9 +34,9 @@ export default {
     },
     async getList () {
       try {
-        const res = await this.$_api.getList()
-        console.log('list', res)
-        this.list = res.map(item => {
+        const data = await this.$_api.getList()
+        console.log('list', data)
+        this.list = data.map(item => {
           return {
             title: item.title,
             image: 'http://jimrae.top:3001' + item.image
@@ -49,22 +49,22 @@ export default {
     },
     async postData () {
       try {
-        const res = await this.$_api.postData({
+        const data = await this.$_api.postData({
           username: 'admin',
           password: 'admin'
         })
-        console.log('postData', res)
+        console.log('postData', data)
       } catch (error) {
         console.log(error)
       }
     },
     async postDataByxForm () {
       try {
-        const res = await this.$_api.postDataByxForm({
+        const data = await this.$_api.postDataByxForm({
           username: 'admin',
           password: 'admin'
         })
-        console.log('postDataByxForm', res)
+        console.log('postDataByxForm', data)
       } catch (error) {
         console.log(error)
       }
