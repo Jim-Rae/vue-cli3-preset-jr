@@ -27,148 +27,169 @@
    }
  }
 
+ // 可选择地设置是否用important修饰样式
+ @mixin g-important-attr ($attr, $val, $important) {
+   @if ($important) {
+     #{$attr}: $val !important;
+   } @else {
+     #{$attr}: $val;
+   }
+ }
+
  // 适用场景：大中小屏下，设置单个样式值
  @mixin g-media-attr($options: ()){
    $sm: map-get($options, sm);
    $md: map-get($options, md);
    $lg: map-get($options, lg);
    $attr: map-get($options, attr);
+   $important: map-get($options, important);
    @if $sm {
      @include g-media-sm(){
-       #{$attr}: $sm;
+       @include g-important-attr($attr, $sm, $important);
      }
    }
    @if $md {
      @include g-media-md(){
-       #{$attr}: $md;
+       @include g-important-attr($attr, $md, $important);
      }
    }
    @if $lg {
      @include g-media-lg(){
-       #{$attr}: $lg;
+       @include g-important-attr($attr, $lg, $important);
      }
    }
  }
 
  // 各属性设置
 
- @mixin g-width($sm: null, $md: null, $lg: null){
+ @mixin g-width($sm: null, $md: null, $lg: null, $important: false){
    @include g-media-attr(
      $options: (
        sm: $sm,
        md: $md,
        lg: $lg,
-       attr: width
+       attr: width,
+       important: $important
      )
    );
  }
 
- @mixin g-height($sm: null, $md: null, $lg: null){
+ @mixin g-height($sm: null, $md: null, $lg: null, $important: false){
    @include g-media-attr(
      $options: (
        sm: $sm,
        md: $md,
        lg: $lg,
-       attr: height
+       attr: height,
+       important: $important
      )
    );
  }
 
- @mixin g-pd-lf($sm: null, $md: null, $lg: null){
+ @mixin g-pd-lf($sm: null, $md: null, $lg: null, $important: false){
    @include g-media-attr(
      $options: (
        sm: $sm,
        md: $md,
        lg: $lg,
-       attr: padding-left
+       attr: padding-left,
+       important: $important
      )
    );
  }
 
- @mixin g-pd-rt($sm: null, $md: null, $lg: null){
+ @mixin g-pd-rt($sm: null, $md: null, $lg: null, $important: false){
    @include g-media-attr(
      $options: (
        sm: $sm,
        md: $md,
        lg: $lg,
-       attr: padding-right
+       attr: padding-right,
+       important: $important
      )
    );
  }
 
- @mixin g-pd-tp($sm: null, $md: null, $lg: null){
+ @mixin g-pd-tp($sm: null, $md: null, $lg: null, $important: false){
    @include g-media-attr(
      $options: (
        sm: $sm,
        md: $md,
        lg: $lg,
-       attr: padding-top
+       attr: padding-top,
+       important: $important
      )
    );
  }
 
- @mixin g-pd-bt($sm: null, $md: null, $lg: null){
+ @mixin g-pd-bt($sm: null, $md: null, $lg: null, $important: false){
    @include g-media-attr(
      $options: (
        sm: $sm,
        md: $md,
        lg: $lg,
-       attr: padding-bottom
+       attr: padding-bottom,
+       important: $important
      )
    );
  }
 
- @mixin g-mg-lf($sm: null, $md: null, $lg: null){
+ @mixin g-mg-lf($sm: null, $md: null, $lg: null, $important: false){
    @include g-media-attr(
      $options: (
        sm: $sm,
        md: $md,
        lg: $lg,
-       attr: margin-left
+       attr: margin-left,
+       important: $important
      )
    );
  }
 
- @mixin g-mg-rt($sm: null, $md: null, $lg: null){
+ @mixin g-mg-rt($sm: null, $md: null, $lg: null, $important: false){
    @include g-media-attr(
      $options: (
        sm: $sm,
        md: $md,
        lg: $lg,
-       attr: margin-right
+       attr: margin-right,
+       important: $important
      )
    );
  }
 
- @mixin g-mg-tp($sm: null, $md: null, $lg: null){
+ @mixin g-mg-tp($sm: null, $md: null, $lg: null, $important: false){
    @include g-media-attr(
      $options: (
        sm: $sm,
        md: $md,
        lg: $lg,
-       attr: margin-top
+       attr: margin-top,
+       important: $important
      )
    );
  }
 
- @mixin g-mg-bt($sm: null, $md: null, $lg: null){
+ @mixin g-mg-bt($sm: null, $md: null, $lg: null, $important: false){
    @include g-media-attr(
      $options: (
        sm: $sm,
        md: $md,
        lg: $lg,
-       attr: margin-bottom
+       attr: margin-bottom,
+       important: $important
      )
    );
  }
 
- @mixin g-display($sm: null, $md: null, $lg: null){
+ @mixin g-display($sm: null, $md: null, $lg: null, $important: false){
    @include g-media-attr(
      $options: (
        sm: $sm,
        md: $md,
        lg: $lg,
-       attr: display
+       attr: display,
+       important: $important
      )
    );
  }
