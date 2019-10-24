@@ -4,9 +4,9 @@
 $form-label-width: 150px !default;
 .form {
 	// 布局
-    max-width: 800px;
-    @include g-mg-lf(auto, 60px, 20px);
-    @include g-mg-rt(auto, 60px, 20px);
+  max-width: 800px;
+  @include g-mg-lf(auto, 60px, 20px);
+  @include g-mg-rt(auto, 60px, 20px);
 	@include g-width(80%, calc(100% - 120px), calc(100% - 40px));
 
 	.el-form-item__label {
@@ -23,11 +23,11 @@ $form-label-width: 150px !default;
 	}
 
 	.el-form-item__content {
-        @include g-media-attr((
-            attr: 'overflow',
-            md: hidden, // 自适应剩余宽度
-            sm: inherit
-        ));
+    @include g-media-attr((
+      attr: 'overflow',
+      md: hidden, // 自适应剩余宽度
+      sm: inherit
+    ));
 	}
 
 	.g-divide-line{
@@ -72,7 +72,7 @@ $form-label-width: 150px !default;
 
 // 文本溢出隐藏，需要设定 width ，建议设置元素 title 属性
 .text-ellipsis {
-    overflow: hidden;
-    text-overflow: ellipsis;
+  overflow: hidden;
+  text-overflow: ellipsis;
 	white-space: nowrap;
 }

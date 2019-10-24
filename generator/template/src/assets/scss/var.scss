@@ -3,15 +3,16 @@
  */
 
 
-//大屏,适应PC screen >=992
+// 超小屏, <768px
+$g-media-xs: 768px;
+// 小屏, >=768px
+$g-media-sm: 768px;
+// 中屏, >=992px
 $g-media-md: 992px;
-// 中屏，适应各种pad，768px<= screen <=991
-$g-media-sm: 991px;
-// 小屏，适应 手机  screen<= 767px
-$g-media-xs: 767px;
-// 大屏下容器宽度----已废弃，默认即占比100%
-// $g-media-sm-main-width: 1200px !default;
-
+// 大屏, >=1200px
+$g-media-lg: 1200px;
+// 超大屏, >=1920px
+$g-media-xl: 1920px;
 
 $g-header-height: 60px !default;
 
