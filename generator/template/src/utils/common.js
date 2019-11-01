@@ -22,8 +22,16 @@ const computeScrollBarWidth = () => {
   box.style.top = '-9999px'
   box.style.overflow = 'scroll'
   document.body.appendChild(box)
+
+  // 兼容ie, 由于在ie中，如果div里没有内容，clientWidth会为0
+  const inner = document.createElement('div')
+  inner.style.width = '100%'
+  inner.style.height = '200%'
+  box.appendChild(inner)
+
   // 在box没有border的情况下，box.offsetWidth和box.clientWidth的差值就是滚动条宽度
   const scrollBarWidth = box.offsetWidth - box.clientWidth
+
   box.parentNode.removeChild(box)
 
   return scrollBarWidth
