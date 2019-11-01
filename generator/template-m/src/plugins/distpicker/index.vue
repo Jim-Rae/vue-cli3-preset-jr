@@ -115,7 +115,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '@/assets/scss/index';
+@import '@/assets/scss';
 
 #my-distpicker{
 
@@ -125,11 +125,11 @@ export default {
 
   .picker-item{
     font-size: 30px;
-    color: $g-color-normal-font;
+    color: $g-fs-bs;
   }
 
   .picker-selected {
-    color: $g-color-strong-font;
+    color: $g-fs-lg;
   }
 
   .picker-toolbar{
@@ -142,7 +142,7 @@ export default {
 
     &-title{
       font-size: 34px;
-      color: $g-color-strong-font;
+      color: $g-fs-lg;
       max-width: 350px;
       height: 80px;
       line-height: 80px;

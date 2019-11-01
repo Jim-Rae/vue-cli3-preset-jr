@@ -1,78 +1,81 @@
-@import '../index.scss';
+/**
+ * @Desc 全局类
+ */
 
-// 表单自适应布局，不再使用 label-width 属性声明
-$form-label-width: 150px !default;
-.form {
-	// 布局
-  max-width: 800px;
-  @include g-mg-lf(auto, 60px, 20px);
-  @include g-mg-rt(auto, 60px, 20px);
-	@include g-width(80%, calc(100% - 120px), calc(100% - 40px));
+@import '../var';
 
-	.el-form-item__label {
-		@include g-width($form-label-width, 100%);
-		@include g-media-attr((
-			attr: 'text-align',
-			md: right,
-			sm: left
-		));
-	}
+/* 文本溢出隐藏，需要设定 width ，建议设置元素 title 属性 */
 
-	.el-form-item{
-		margin: 22px auto ;
-	}
-
-	.el-form-item__content {
-    @include g-media-attr((
-      attr: 'overflow',
-      md: hidden, // 自适应剩余宽度
-      sm: inherit
-    ));
-	}
-
-	.g-divide-line{
-		line-height: 2;
-		// 缩进和上方的label一样宽
-		@include g-media-attr((
-			attr: 'text-indent',
-			md: $form-label-width,
-			sm: 0
-		));
-		@include g-set-font($font-size: $g-fs-small, $color: $g-color-gray);
-		border-bottom: 1px dashed rgba($g-color-yellow-light, .3);
-
-		&.no-line{
-			border: none;
-		}
-	}
-
-	// 头像
-	.avatar {
-		width: 100px;
-		height: 100px;
-		border-radius: 50%;
-	}
-
-	// 标签
-	.el-tag {
-		margin-right: 10px;
-	}
-
-	.button-new-tag {
-		height: 32px;
-		line-height: 30px;
-		padding-top: 0;
-		padding-bottom: 0;
-	}
-	.input-new-tag {
-		width: 90px;
-		vertical-align: bottom;
-	}
-}
-
-// 文本溢出隐藏，需要设定 width ，建议设置元素 title 属性
+// 最多显示一行
 .text-ellipsis {
   overflow: hidden;
   text-overflow: ellipsis;
 	white-space: nowrap;
+}
+
+// 最多显示两行
+.text-ellipsis--l2 {
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+// 最多显示三行
+.text-ellipsis--l3 {
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+/* 1px边框 */
+// 上边框  .hairline--top
+// 下边框  .hairline--bottom
+// 左边框  .hairline--left
+// 右边框  .hairline--right
+// 上下边框  .hairline--top-bottom
+// 全边框  .hairline--surround
+
+.hairline--top, .hairline--bottom, .hairline--left, .hairline--right, .hairline--surround, .hairline--top-bottom {
+  position: relative;
+}
+
+[class*=hairline]:after {
+  position: absolute;
+  box-sizing: border-box;
+  content: " ";
+  pointer-events: none;
+  top: -50%;
+  right: -50%;
+  bottom: -50%;
+  left: -50%;
+  border: 0 solid $g-color-border;
+  transform: scale(.5);
+}
+
+.hairline--top:after {
+  border-top-width: 1px;
+}
+
+.hairline--bottom:after {
+  border-bottom-width: 1px;
+}
+
+.hairline--left:after {
+  border-left-width: 1px;
+}
+
+.hairline--right:after {
+  border-right-width: 1px;
+}
+
+.hairline--surround:after {
+  border-width: 1px;
+}
+
+.hairline--top-bottom:after {
+  border-width: 1px 0;
 }

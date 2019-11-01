@@ -20,7 +20,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '@/assets/scss/index';
+@import '@/assets/scss';
 
 .index {
   text-align: center;
@@ -33,14 +33,14 @@ export default {
   }
 
   .title {
-    font-size: 40px;
-    color: $g-color-themegreen;
+    font-size: $g-fs-xl;
+    color: $g-color-theme;
     margin-bottom: 20px;
   }
 
   .author {
-    font-size: 32px;
-    color: $g-color-normal-font;
+    font-size: $g-fs-md;
+    color: $g-color-font--normal;
   }
 
   .button {
@@ -48,7 +48,7 @@ export default {
   }
 
   .link {
-    font-size: 28px;
+    font-size: $g-fs-bs;
     text-decoration: underline;
   }
 
@@ -57,8 +57,8 @@ export default {
     left: 0;
     bottom: 0;
     width: 100%;
-    font-size: 24px;
-    color: $g-color-normal-font;
+    font-size: $g-fs-xs;
+    color: $g-color-font--normal;
     margin: auto;
     padding: 19px;
     line-height: 30px;

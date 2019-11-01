@@ -101,22 +101,21 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '@/assets/scss/var';
-@import '@/assets/scss/mixin/layout';
+@import '@/assets/scss';
 
 .login{
   width: 100%;
   height: 100vh;
-  background-color: $g-color-themegreen;
+  background-color: $g-color-theme;
 
   .form-contianer{
+    @include g-layout-center-margin(350px, 220px, 'both');
     width: 350px;
     height: 220px;
     padding: 25px;
     border-radius: 5px;
     text-align: center;
     background-color: #fff;
-    @include g-layout-center-margin(350px, 220px, 'both');
 
     .submit-btn{
       width: 100%;
@@ -124,7 +123,7 @@ export default {
     }
 
     .register-link {
-      color: $g-color-themegreen;
+      color: $g-color-theme;
 
       &:hover {
         text-decoration: underline;

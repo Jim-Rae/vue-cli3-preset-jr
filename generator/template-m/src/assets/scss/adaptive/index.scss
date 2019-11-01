@@ -1,255 +1,197 @@
 /**
- * @author: liuqiao;
- * @date: 2019/07/08;
- * @description:响应式设计
- * 用法： 通过使用mixin来使用，
- * eg:
- * 1.@include g-col(80, 100);表示大屏下宽度占比80%，中屏、小屏下宽度占比100%；
- * 2.@include g-pd-lf/g-pd-rt/g-pd-tp/g-pd-bt(x, y, z)，代表padding四个方向的大屏x，中屏y，小屏z距离设定。单位可以是百分比(即相对于父元素的width)，也可以是px,或em(即相对于元素本身的fontSize)
- *
+ * @Author: Jim Rae
+ * @Date: 2019-10-24
+ * @Last Modified by: Jim Rae
+ * @Last Modified time: 2019-10-24
+ * @Desc 通过@media查询响应式设置样式
  */
 
 @import '../var';
-//栅栏数
-$gutterCount: 100;
 
-// sass无法元编程，通过循环生成各种mixin，故layoutMap无法使用去优化生成mixin的代码了
-// https://stackoverflow.com/questions/39380955/how-to-generate-multiple-mixins-mixin-lib-with-loop-in-sass
-// $layoutMap: (
-// 				width: width,
-// 				display: display,
-// 				left: left,
-// 				right: right,
-// 				top: top,
-// 				bottom: bottom,
-// 				margin-left: mg-lf,
-// 				margin-right: mg-rt,
-// 				margin-top: mg-tp,
-// 				margin-bottom: mg-bt,
-// 				padding-left: pd-lf,
-// 				padding-right: pd-rt,
-// 				padding-top: pd-tp,
-// 				padding-bottom: pd-bt
-// 			);
-
-//大屏样式
-//适用场景：设置多个样式
+// 小屏样式
+@mixin g-media-sm(){
+	@media screen and (max-width: $g-media-md){
+		@content;
+	}
+}
+// 中屏样式
 @mixin g-media-md(){
 	@media screen and (min-width: $g-media-md){
 		@content;
 	}
 }
-// 中屏样式
-//适用场景：设置多个样式
-@mixin g-media-sm(){
-	@media screen and (max-width: $g-media-sm){
+// 大屏样式
+@mixin g-media-lg(){
+	@media screen and (min-width: $g-media-lg){
 		@content;
 	}
 }
-// 小屏样式
-//适用场景：设置多个样式
-@mixin g-media-xs(){
-	@media screen and (max-width: $g-media-xs){
-		@content;
-	}
+
+// 可选择地设置是否用important修饰样式
+@mixin g-important-attr ($attr, $val, $important) {
+  @if ($important) {
+    #{$attr}: $val !important;
+  } @else {
+    #{$attr}: $val;
+  }
 }
 
 // 适用场景：大中小屏下，设置单个样式值
 @mixin g-media-attr($options: ()){
-	$md: map-get($options, md);
-	$sm: map-get($options, sm);
-	$xs: map-get($options, xs);
-	$attr: map-get($options, attr);
-	@if $md {
-		@include g-media-md(){
-			#{$attr}: $md;
-		}
-	}
+  $sm: map-get($options, sm);
+  $md: map-get($options, md);
+  $lg: map-get($options, lg);
+  $attr: map-get($options, attr);
+  $important: map-get($options, important);
 	@if $sm {
 		@include g-media-sm(){
-			#{$attr}: $sm;
+      @include g-important-attr($attr, $sm, $important);
 		}
-	}
-	@if $xs {
-		@include g-media-xs(){
-			#{$attr}: $xs;
-		}
-	}
-}
-
-
-
-//定义被@extend的 样式代码 重构成容易被理解的形式
-@for $idx from 1 through $gutterCount{
-	$per: percentage($idx / $gutterCount);
-	// 生成各种设备下百分比 placeholder
-	// 这里 写成 @include g-media-md(){
-	// 	%g-col-md-#{$idx}{
-	// 			xxxx
-	// 	}
-	// }
-	// 一样可以，说明如果适用 @extend的地方，没有被media包围，那么被继承的样式不管是
-	// 样式包裹media还是 media包裹样式的 情况，都能被 @extend继承到
-	%g-col-md-#{$idx}{
+  }
+  @if $md {
 		@include g-media-md(){
-			width: $per;
+			@include g-important-attr($attr, $md, $important);
 		}
-	}
-	%g-col-sm-#{$idx}{
-		@include g-media-sm(){
-			width: $per;
+  }
+  @if $lg {
+		@include g-media-lg(){
+			@include g-important-attr($attr, $lg, $important);
 		}
-	}
-	%g-col-xs-#{$idx}{
-		@include g-media-xs(){
-			width: $per;
-		}
-	}
+  }
+  transition: $attr .5s;
 }
 
-// 生成列布局mixin
-// 遇到的bug: 如果@extend被media包围，那么@extend只能继承 同样是@media里面的样式。不能继承 没有定义在@media中的外部样式
-@mixin g-col($md: null, $sm: null, $xs: null){
-	@if $md {
-		@extend %g-col-md-#{$md}
-	}
-	@if $sm {
-		@extend %g-col-sm-#{$sm}
-	}
-	@if $xs {
-		@extend %g-col-xs-#{$xs}
-	}
-}
+// 各属性设置
 
-@mixin g-width($md: null, $sm: null, $xs: null){
+@mixin g-width($sm: null, $md: null, $lg: null, $important: false){
 	@include g-media-attr(
-			$options: (
-				md: $md,
-				sm: $sm,
-				xs: $xs,
-				attr: width
-			)
-		);
+    $options: (
+      sm: $sm,
+      md: $md,
+      lg: $lg,
+      attr: width,
+      important: $important
+    )
+  );
 }
 
-@mixin g-pd-lf($md: null, $sm: null, $xs: null){
+@mixin g-height($sm: null, $md: null, $lg: null, $important: false){
 	@include g-media-attr(
-			$options: (
-				md: $md,
-				sm: $sm,
-				xs: $xs,
-				attr: padding-left
-			)
-		);
+    $options: (
+      sm: $sm,
+      md: $md,
+      lg: $lg,
+      attr: height,
+      important: $important
+    )
+  );
 }
 
-@mixin g-pd-rt($md: null, $sm: null, $xs: null){
+@mixin g-pd-lf($sm: null, $md: null, $lg: null, $important: false){
 	@include g-media-attr(
-			$options: (
-				md: $md,
-				sm: $sm,
-				xs: $xs,
-				attr: padding-right
-			)
-		);
+    $options: (
+      sm: $sm,
+      md: $md,
+      lg: $lg,
+      attr: padding-left,
+      important: $important
+    )
+  );
 }
-@mixin g-pd-tp($md: null, $sm: null, $xs: null){
+
+@mixin g-pd-rt($sm: null, $md: null, $lg: null, $important: false){
 	@include g-media-attr(
-			$options: (
-				md: $md,
-				sm: $sm,
-				xs: $xs,
-				attr: padding-top
-			)
-		);
-
+    $options: (
+      sm: $sm,
+      md: $md,
+      lg: $lg,
+      attr: padding-right,
+      important: $important
+    )
+  );
 }
-@mixin g-pd-bt($md: null, $sm: null, $xs: null){
+
+@mixin g-pd-tp($sm: null, $md: null, $lg: null, $important: false){
 	@include g-media-attr(
-			$options: (
-				md: $md,
-				sm: $sm,
-				xs: $xs,
-				attr: padding-bottom
-			)
-		);
+    $options: (
+      sm: $sm,
+      md: $md,
+      lg: $lg,
+      attr: padding-top,
+      important: $important
+    )
+  );
 }
 
-@mixin g-mg-lf($md: null, $sm: null, $xs: null){
+@mixin g-pd-bt($sm: null, $md: null, $lg: null, $important: false){
 	@include g-media-attr(
-			$options: (
-				md: $md,
-				sm: $sm,
-				xs: $xs,
-				attr: margin-left
-			)
-		);
+    $options: (
+      sm: $sm,
+      md: $md,
+      lg: $lg,
+      attr: padding-bottom,
+      important: $important
+    )
+  );
 }
 
-@mixin g-mg-rt($md: null, $sm: null, $xs: null){
+@mixin g-mg-lf($sm: null, $md: null, $lg: null, $important: false){
 	@include g-media-attr(
-			$options: (
-				md: $md,
-				sm: $sm,
-				xs: $xs,
-				attr: margin-right
-			)
-		);
+    $options: (
+      sm: $sm,
+      md: $md,
+      lg: $lg,
+      attr: margin-left,
+      important: $important
+    )
+  );
 }
 
-@mixin g-mg-tp($md: null, $sm: null, $xs: null){
+@mixin g-mg-rt($sm: null, $md: null, $lg: null, $important: false){
 	@include g-media-attr(
-			$options: (
-				md: $md,
-				sm: $sm,
-				xs: $xs,
-				attr: margin-top
-			)
-		);
-
+    $options: (
+      sm: $sm,
+      md: $md,
+      lg: $lg,
+      attr: margin-right,
+      important: $important
+    )
+  );
 }
 
-@mixin g-mg-bt($md: null, $sm: null, $xs: null){
+@mixin g-mg-tp($sm: null, $md: null, $lg: null, $important: false){
 	@include g-media-attr(
-			$options: (
-				md: $md,
-				sm: $sm,
-				xs: $xs,
-				attr: margin-bottom
-			)
-		);
+    $options: (
+      sm: $sm,
+      md: $md,
+      lg: $lg,
+      attr: margin-top,
+      important: $important
+    )
+  );
 }
 
-
-
-@mixin g-display($md: null, $sm: null, $xs: null){
+@mixin g-mg-bt($sm: null, $md: null, $lg: null, $important: false){
 	@include g-media-attr(
-			$options: (
-				md: $md,
-				sm: $sm,
-				xs: $xs,
-				attr: display
-			)
-		);
+    $options: (
+      sm: $sm,
+      md: $md,
+      lg: $lg,
+      attr: margin-bottom,
+      important: $important
+    )
+  );
 }
 
+@mixin g-display($sm: null, $md: null, $lg: null, $important: false){
+	@include g-media-attr(
+    $options: (
+      sm: $sm,
+      md: $md,
+      lg: $lg,
+      attr: display,
+      important: $important
+    )
+  );
+}
 
-
-// // 大屏隐藏
-// @mixin g-hidden-md-up{
-// 	@media screen and(max-width: $g-media-sm){
-// 		display: none;
-// 	}
-// }
-// // 中屏隐藏
-// @mixin g-hidden-sm-down{
-// 	@media screen and(max-width: $g-media-sm){
-// 		display: none;
-// 	}
-// }
-// // 小屏隐藏
-// @mixin g-hidden-xs-down{
-// 	@media screen and(max-width: $g-media-xs){
-// 		display: none;
-// 	}
-// }

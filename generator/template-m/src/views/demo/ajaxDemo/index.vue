@@ -31,7 +31,7 @@ export default {
         this.list = res.map((item) => {
           return {
             title: item.title,
-            image: 'http://jimrae.top:3001' + item.image
+            image: 'http://jimrae.top' + item.image
           }
         })
       } catch (error) {
@@ -43,7 +43,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '@/assets/scss/index';
+@import '@/assets/scss';
 
 .ajax-demo {
   padding-top: 84px;
@@ -57,8 +57,8 @@ export default {
     }
 
     p {
-      font-size: 28px;
-      color: $g-color-themegreen;
+      font-size: $g-fs-bs;
+      color: $g-color-theme;
     }
   }
 }

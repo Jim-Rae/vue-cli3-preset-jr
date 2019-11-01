@@ -4,7 +4,7 @@ import axios from 'axios'
 import router from '@/router'
 
 const http = axios.create({
-  baseURL: process.env.NODE_ENV === 'production' ? 'http://www.jimrae.com' : '',
+  baseURL: process.env.NODE_ENV === 'production' ? 'http://jimrae.top' : '',
   timeout: 10000
 })
 

@@ -6,6 +6,8 @@
  * @Desc 常用工具库
  */
 
+import { isArray } from './validator'
+
 /**
  * 计算浏览器默认滚动条宽度
  * @method computeScrollBarWidth
@@ -52,8 +54,8 @@ const fastCopy = (obj, keysArr) => {
  * @param {string} str 需要操作的字符串
  * @returns {String}
  */
-function trim(str) {
-  return str.replace(/^\s*/, '').replace(/\s*$/, '');
+function trim (str) {
+  return str.replace(/^\s*/, '').replace(/\s*$/, '')
 }
 
 /**
@@ -64,21 +66,21 @@ function trim(str) {
  */
 function forEach (obj, fn) {
   if (obj === null || typeof obj === 'undefined') {
-    return;
+    return
   }
 
   if (typeof obj !== 'object') {
-    obj = [obj];
+    obj = [obj]
   }
 
   if (isArray(obj)) {
     for (var i = 0, l = obj.length; i < l; i++) {
-      fn.call(null, obj[i], i, obj);
+      fn(obj[i], i, obj)
     }
   } else {
     for (var key in obj) {
       if (Object.prototype.hasOwnProperty.call(obj, key)) {
-        fn.call(null, obj[key], key, obj);
+        fn(obj[key], key, obj)
       }
     }
   }
@@ -91,20 +93,20 @@ function forEach (obj, fn) {
  * @param {object} obj1 需要合并的对象
  * @returns {object} 合并后的对象
  */
-function deepMerge(...params) {
-  var result = {};
-  function assignValue(val, key) {
+function deepMerge (...params) {
+  var result = {}
+  function assignValue (val, key) {
     if (typeof result[key] === 'object' && typeof val === 'object') {
-      result[key] = deepMerge(result[key], val);
+      result[key] = deepMerge(result[key], val)
     } else {
-      result[key] = val;
+      result[key] = val
     }
   }
 
   for (var i = 0, l = params.length; i < l; i++) {
-    forEach(params[i], assignValue);
+    forEach(params[i], assignValue)
   }
-  return result;
+  return result
 }
 
 /**
@@ -123,13 +125,13 @@ function dateToString (dateInstance, seperator = '-') {
   let monthStr = ''
   let dateStr = ''
   if (month >= 1 && month <= 9) {
-    monthStr = '0' + month;
+    monthStr = '0' + month
   }
   if (date >= 0 && date <= 9) {
-    dateStr = '0' + date;
+    dateStr = '0' + date
   }
-  const currentdate = yearStr + seperator + monthStr + seperator + dateStr;
-  return currentdate;
+  const currentdate = yearStr + seperator + monthStr + seperator + dateStr
+  return currentdate
 }
 
 /**
@@ -150,104 +152,141 @@ function getWeekNameFromDate (date, prefix = '周') {
  * 传入数字字符串则没有限制
  * @param {number|string} digit
  */
-function toZhDigit(digit) {
-  digit = typeof digit === 'number' ? String(digit) : digit;
-  const zh = ['零', '一', '二', '三', '四', '五', '六', '七', '八', '九'];
-  const unit = ['千', '百', '十', ''];
-  const quot = ['万', '亿', '兆', '京', '垓', '秭', '穰', '沟', '涧', '正', '载', '极', '恒河沙', '阿僧祗', '那由他', '不可思议', '无量', '大数'];
+function toZhDigit (digit) {
+  digit = typeof digit === 'number' ? String(digit) : digit
+  const zh = ['零', '一', '二', '三', '四', '五', '六', '七', '八', '九']
+  const unit = ['千', '百', '十', '']
+  const quot = ['万', '亿', '兆', '京', '垓', '秭', '穰', '沟', '涧', '正', '载', '极', '恒河沙', '阿僧祗', '那由他', '不可思议', '无量', '大数']
 
-  let breakLen = Math.ceil(digit.length / 4);
-  let notBreakSegment = digit.length % 4 || 4;
-  let segment;
-  let zeroFlag = [], allZeroFlag = [];
-  let result = '';
+  let breakLen = Math.ceil(digit.length / 4)
+  let notBreakSegment = digit.length % 4 || 4
+  let segment
+  let zeroFlag = []; let allZeroFlag = []
+  let result = ''
 
   while (breakLen > 0) {
     if (!result) { // 第一次执行
-      segment = digit.slice(0, notBreakSegment);
-      let segmentLen = segment.length;
+      segment = digit.slice(0, notBreakSegment)
+      let segmentLen = segment.length
       for (let i = 0; i < segmentLen; i++) {
-        if (segment[i] != 0) {
+        if (segment[i] !== 0) {
           if (zeroFlag.length > 0) {
-            result += '零' + zh[segment[i]] + unit[4 - segmentLen + i];
+            result += '零' + zh[segment[i]] + unit[4 - segmentLen + i]
             // 判断是否需要加上 quot 单位
             if (i === segmentLen - 1 && breakLen > 1) {
-              result += quot[breakLen - 2];
+              result += quot[breakLen - 2]
             }
-            zeroFlag.length = 0;
+            zeroFlag.length = 0
           } else {
-            result += zh[segment[i]] + unit[4 - segmentLen + i];
+            result += zh[segment[i]] + unit[4 - segmentLen + i]
             if (i === segmentLen - 1 && breakLen > 1) {
-              result += quot[breakLen - 2];
+              result += quot[breakLen - 2]
             }
           }
         } else {
           // 处理为 0 的情形
-          if (segmentLen == 1) {
-            result += zh[segment[i]];
-            break;
+          if (segmentLen === 1) {
+            result += zh[segment[i]]
+            break
           }
-          zeroFlag.push(segment[i]);
-          continue;
+          zeroFlag.push(segment[i])
+          continue
         }
       }
     } else {
-      segment = digit.slice(notBreakSegment, notBreakSegment + 4);
-      notBreakSegment += 4;
+      segment = digit.slice(notBreakSegment, notBreakSegment + 4)
+      notBreakSegment += 4
 
       for (let j = 0; j < segment.length; j++) {
-        if (segment[j] != 0) {
+        if (segment[j] !== 0) {
           if (zeroFlag.length > 0) {
             // 第一次执行zeroFlag长度不为0，说明上一个分区最后有0待处理
             if (j === 0) {
-              result += quot[breakLen - 1] + zh[segment[j]] + unit[j];
+              result += quot[breakLen - 1] + zh[segment[j]] + unit[j]
             } else {
-              result += '零' + zh[segment[j]] + unit[j];
+              result += '零' + zh[segment[j]] + unit[j]
             }
-            zeroFlag.length = 0;
+            zeroFlag.length = 0
           } else {
-            result += zh[segment[j]] + unit[j];
+            result += zh[segment[j]] + unit[j]
           }
           // 判断是否需要加上 quot 单位
           if (j === segment.length - 1 && breakLen > 1) {
-            result += quot[breakLen - 2];
+            result += quot[breakLen - 2]
           }
         } else {
           // 第一次执行如果zeroFlag长度不为0, 且上一划分不全为0
           if (j === 0 && zeroFlag.length > 0 && allZeroFlag.length === 0) {
-            result += quot[breakLen - 1];
-            zeroFlag.length = 0;
-            zeroFlag.push(segment[j]);
+            result += quot[breakLen - 1]
+            zeroFlag.length = 0
+            zeroFlag.push(segment[j])
           } else if (allZeroFlag.length > 0) {
             // 执行到最后
-            if (breakLen == 1) {
-              result += '';
+            if (breakLen === 1) {
+              result += ''
             } else {
-              zeroFlag.length = 0;
+              zeroFlag.length = 0
             }
           } else {
-            zeroFlag.push(segment[j]);
+            zeroFlag.push(segment[j])
           }
 
           if (j === segment.length - 1 && zeroFlag.length === 4 && breakLen !== 1) {
             // 如果执行到末尾
             if (breakLen === 1) {
-              allZeroFlag.length = 0;
-              zeroFlag.length = 0;
-              result += quot[breakLen - 1];
+              allZeroFlag.length = 0
+              zeroFlag.length = 0
+              result += quot[breakLen - 1]
             } else {
-              allZeroFlag.push(segment[j]);
+              allZeroFlag.push(segment[j])
             }
           }
-          continue;
+          continue
         }
       }
     }
 
-    --breakLen;
+    --breakLen
   }
 
-  return result;
+  return result
+}
+
+/**
+ * 将数字转化成保留两位小数的金额格式，如999,999,999.99
+ *
+ * @method parsePriceFormat
+ * @param {number} price 需要转换的价格
+ * @returns {String} 保留两位小数的金额格式
+ */
+function parsePriceFormat (price) {
+  const str = price.toFixed(2)
+  let newStr = ''
+  let count = 0
+  if (!str.includes('.')) {
+    for (let i = str.length - 1; i >= 0; i--) {
+      if (count % 3 === 0 && count !== 0) {
+        newStr = str.charAt(i) + ',' + newStr
+      } else {
+        newStr = str.charAt(i) + newStr
+      }
+      count++
+    }
+    // 自动补小数点后两位
+    newStr += '.00'
+    return newStr
+  } else {
+    for (var i = str.indexOf('.') - 1; i >= 0; i--) {
+      if (count % 3 === 0 && count !== 0) {
+        newStr = str.charAt(i) + ',' + newStr
+      } else {
+        newStr = str.charAt(i) + newStr
+      }
+      count++
+    }
+    newStr += str.substr(str.indexOf('.'), 3)
+    return newStr
+  }
 }
 
 export {
@@ -258,5 +297,6 @@ export {
   deepMerge,
   dateToString,
   getWeekNameFromDate,
-  toZhDigit
+  toZhDigit,
+  parsePriceFormat
 }

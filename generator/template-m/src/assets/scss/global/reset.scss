@@ -1,25 +1,27 @@
-// @author: liuqiao;
-// @date: 2018-12-10;
-// @description: 重设样式
-@import '../mixin/layout';
+/**
+ * @Desc 重设样式
+ */
 
+@import '../var';
 
 * {
   box-sizing: border-box;
 }
+
 *:before,
 *:after {
   box-sizing: border-box;
 }
+
 html, body{
-	font-family: -apple-system, "Noto Sans", "Helvetica Neue", Helvetica, "Nimbus Sans L", Arial,
-      "Liberation Sans", "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC",
-      "Source Han Sans SC", "Source Han Sans CN", "Microsoft YaHei", "Wenquanyi Micro Hei",
-      "WenQuanYi Zen Hei", "ST Heiti", SimHei, "WenQuanYi Zen Hei Sharp", sans-serif;
+	font-family: $g-ff;
   font-weight: normal;
-  font-size: 14px;
+  font-size: $g-fs-bs;
 	width: 100%;
-  color: #000;
+  color: $g-color-font--normal;
+
+  // 关闭x轴滚动
+  overflow-x: hidden;
 }
 
 html, body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, button, textarea, p, blockquote, th, td {
@@ -34,9 +36,11 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: normal;
   font-size: 100%;
 }
+
 i{
   font-style: normal;
 }
+
 ol, ul, li {
   list-style: none;
 }
@@ -46,27 +50,21 @@ img {
   max-width: 100%;
 }
 
-
-// 处理小屏下的 datepicker/daterange
-@media screen and (max-width: 635px){
-  .el-date-range-picker {
-    width: 100%;
-  }
+input, button {
+  border: none;
+  outline: none;
+  background-color: transparent;
 }
-@media screen and (max-width: 520px){
-  .el-date-range-picker {
-    width: 90%;
 
-    .el-picker-panel__body {
-      min-width: 0;
-      padding: 10px
-    }
-
-    .el-date-range-picker__content {
-      padding: 0;
-      width: 100%;
-      box-sizing: border-box;
-      border: none;
-    }
-  }
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+  color: $g-color-font--placeholder;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+  color: $g-color-font--placeholder;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+  color: $g-color-font--placeholder;
+}
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: $g-color-font--placeholder;
 }

@@ -2,6 +2,7 @@
  * @Desc scss常用变量表
  */
 
+/* 屏幕大小 */
 
 // 超小屏, <768px
 $g-media-xs: 768px;
@@ -14,78 +15,57 @@ $g-media-lg: 1200px;
 // 超大屏, >=1920px
 $g-media-xl: 1920px;
 
+
+/* 字体相关 */
+
+// 字体
+$g-ff: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+
+// 辅助文字
+$g-fs-xs: 12px !default;
+// 正文（小）
+$g-fs-sm: 13px !default;
+// 正文
+$g-fs-bs: 14px !default;
+// 小标题
+$g-fs-md: 16px !default;
+// 标题
+$g-fs-lg: 18px !default;
+// 主标题
+$g-fs-xl: 20px !default;
+
+// 无行高
+$g-lh-no: 1 !default;
+// 紧凑
+$g-lh-sm: 1.3 !default;
+// 常规
+$g-lh-md: 1.5 !default;
+// 宽松
+$g-lh-lg: 1.7 !default;
+// 两倍
+$g-lh-xl: 2 !default;
+
+
+/* 布局相关 */
+
+// 头部高度
 $g-header-height: 60px !default;
 
 
-// 颜色区域: $g-color-颜色-修饰词（light,normal,strong）-用处/场景;
-//light,lighter,lightest
-//strong, stronger, strongest
-// 页面绿色
-$g-color-themegreen: #42b983 !default;
-// 页面黄色
-$g-color-yellow: #FA8334 !default;
-// hover页面黄色
-$g-color-yellow-light: #EA782B !default;
-// 页面黑色
-$g-color-black: #333 !default;
-// 白色
-$g-color-white: #FFF !default;
-// 轻调色，灰色
-$g-color-gray: #8D9296 !default;
-// 背景灰色
-$g-color-gray-bg: #F8F9F9 !default;
-// 线条灰色
-$g-color-gray-line: #E4E7ED !default;
-// 正常色
-$g-color-normal-font: #5D646F !default;
-// 着重色
-$g-color-strong-font: #2F2F2F !default;
-// 绿色，代表成功
-$g-color-green: #67C23A;
-// 蓝色
-$g-color-blue:#409eff;
-// 黄色-level
-$g-color-yellow-level: #f1bb12;
-// 红色
-$g-color-red:#f56c6c;
+/* 颜色 */
 
-// 导出给 level2FontColor 使用
-:export {
-    blueColor: $g-color-blue;
-    yellowColor: $g-color-yellow-level;
-    redColor: $g-color-red;
-    grayColor: $g-color-gray;
-}
+// 主题色
+$g-color-theme: #42b983 !default;
+// 对立色
+$g-color-oppo: #FA8334 !default;
+// 主要文字色
+$g-color-font--strong: #303133 !default;
+// 常规文字色
+$g-color-font--normal: #606266 !default;
+// 次要文字色
+$g-color-font--minor: #909399 !default;
+// 占位文字色
+$g-color-font--placeholder: #C0C4CC !default;
+// 边框色
+$g-color-border: #E4E7ED !default;
 
-// =================================
-
-
-// 小一号字体
-$g-fs-small: 12px !default;
-//一般字体大小
-$g-fs-normal: 14px !default;
-
-//小标题字体大小
-$g-fs-strong: 18px !default;
-
-//着重字体
-$g-fs-large: 24px !default;
-
-
-//一般字体行高
-$g-lh-normal: 25px !default;
-//着重字体行高
-$g-lh-strong: 36px !default;
-
-// 默认行高数字
-$g-lh-normal-num: 1.8 !default;
-// 着重行高数字
-$g-lh-strong-num: 2 !default;
-// 大的行高数字
-$g-lh-large-num: 2.5 !default;
-
-// =================================
-
-// 业务变量
-// 页面背景色
-$g-page-bg-color: #F2F2F2;

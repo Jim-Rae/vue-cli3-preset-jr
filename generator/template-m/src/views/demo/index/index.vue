@@ -28,6 +28,7 @@ export default {
 }
 </script>
 
+
 <style lang="scss" scoped>
 @import '@/assets/scss/index';
 
@@ -38,10 +39,10 @@ export default {
 
     li {
       position: relative;
-      font-size: 28px;
-      color: $g-color-normal-font;
+      font-size: $g-fs-bs;
+      color: $g-color-font--normal;
       padding: 30px;
-      border-bottom: 1px solid $g-color-gray-line;
+      border-bottom: 1px solid $g-color-border;
 
       img {
         @include g-layout-center-transform('y');
