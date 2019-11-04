@@ -17,6 +17,7 @@ const computeScrollBarWidth = () => {
   // 创建一个div来计算浏览器默认滚动条宽度
   const box = document.createElement('div')
   box.style.width = '100px'
+  box.style.height = '100px'
   box.style.visibility = 'hidden'
   box.style.position = 'absolute'
   box.style.top = '-9999px'
