@@ -2,7 +2,7 @@
  * @Author: Jim Rae
  * @Date: 2019-09-04
  * @Last Modified by: Jim Rae
- * @Last Modified time: 2019-10-23
+ * @Last Modified time: 2019-11-25
  * @Desc 常用工具库
  */
 
@@ -298,6 +298,79 @@ function parsePriceFormat (price) {
   }
 }
 
+/**
+ * 兼容的方式绑定事件
+ *
+ * @method registerEvent
+ * @param {any} target 需要绑定事件的目标
+ * @param {string} type 事件类型
+ * @param {any} handler 事件处理函数
+ */
+function registerEvent (target, type, handler) {
+  if (target.addEventListener) {
+    target.addEventListener(type, handler)
+  } else if (target.attachEvent) {
+    // 兼容低版本ie
+    target.attachEvent('on' + type, handler)
+  } else {
+    target['on' + type] = handler
+  }
+}
+
+/**
+ * 兼容的方式解绑事件
+ *
+ * @method removeEvent
+ * @param {any} target 需要解绑事件的目标
+ * @param {string} type 事件类型
+ * @param {any} handler 事件处理函数
+ */
+function removeEvent (target, type, handler) {
+  if (target.removeEventListener) {
+    target.removeEventListener(type, handler)
+  } else if (target.detachEvent) {
+    // 兼容低版本ie
+    target.detachEvent('on' + type, handler)
+  } else {
+    target['on' + type] = null
+  }
+}
+
+/**
+ * 函数去抖
+ *
+ * @method debounce
+ * @param {(...args: any) => void} fn 要去抖的函数
+ * @param {number} delay 去抖时间
+ */
+function debounce (fn, delay = 100) {
+  let timer = 0;
+  return function (...args) {
+    timer && clearTimeout(timer);
+    timer = setTimeout(() => {
+      fn.apply(this, args);
+    }, delay);
+  }
+}
+
+/**
+ * 函数节流
+ *
+ * @method throttle
+ * @param {(...args: any) => void} fn 要节流的函数
+ * @param duration 节流时间间隔
+ */
+function throttle (fn, duration = 100) {
+  let begin = new Date().getTime();
+  return function (...args) {
+    let current = new Date().getTime();
+    if (current - begin >= duration) {
+      fn.apply(this, args)
+      begin = current;
+    }
+  }
+}
+
 export {
   computeScrollBarWidth,
   fastCopy,
@@ -307,5 +380,9 @@ export {
   dateToString,
   getWeekNameFromDate,
   toZhDigit,
-  parsePriceFormat
+  parsePriceFormat,
+  registerEvent,
+  removeEvent,
+  debounce,
+  throttle
 }
