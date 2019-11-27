@@ -25,7 +25,7 @@
         </div>
       </el-header>
       <el-container class="container">
-        <el-aside width="250px">
+        <el-aside>
           <el-menu
             default-active="2"
             class="menu"
@@ -51,7 +51,7 @@
         </el-aside>
         <el-main>
           <breadcrumb/>
-          <awesome-scrollbar-box>
+          <awesome-scrollbar-box class="calc-height">
             <router-view class="view"/>
           </awesome-scrollbar-box>
         </el-main>
@@ -137,13 +137,17 @@ export default {
 }
 
 .container {
-  height: 100%;
+  height: calc(100vh - 60px);
   padding-top: 20px;
 
   .el-aside {
+    @include g-width(200px, 220px, 250px, true);
+
+    // 兼容ie 9
+    float: left;
 
     .menu {
-      height: 100%;
+      height: calc(100vh - 80px);
     }
   }
 
@@ -155,8 +159,17 @@ export default {
     display: flex;
     flex-direction: column;
 
+    // 兼容ie 9-10
+    @include g-width(calc(100% - 150px), calc(100% - 200px), calc(100% - 250px), true);
+    float: left;
+
     .view {
-      padding: 20px;
+      padding: 0 20px 20px 20px;
+    }
+
+    // 兼容ie 9-10
+    .calc-height {
+      height: calc(100% - 54px);
     }
   }
 }

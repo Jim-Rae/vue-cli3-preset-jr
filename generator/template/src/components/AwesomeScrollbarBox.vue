@@ -2,7 +2,7 @@
  * @Author: JimRae
  * @Date: 2019-09-04
  * @Last Modified by: JimRae
- * @Last Modified time: 2019-09-04
+ * @Last Modified time: 2019-11-27
  * @Desc 自带滚动条的box，可以更好的自定义滚动条
  */
 
@@ -14,7 +14,7 @@
       </div>
     </div>
     <div v-show="scrollVisible" class='scrollbar-bar' ref="bar">
-      <div class="scrollbar-thumb" ref="thumb"></div>
+      <div class="scrollbar-thumb" ref="thumb" :style="`height: ${thumbHeight}%; transform: translateY(${thumbMoveY}%)`"></div>
     </div>
   </div>
 </template>
@@ -31,7 +31,9 @@ export default {
       scrollVisible: false,
       cursorDown: false, // 是否按下滚动条
       thumbClickPosition: 0, // 鼠标点击位置到Thumb顶部的距离
-      gutter: 0 // 浏览器默认滚动条的宽度
+      gutter: 0, // 浏览器默认滚动条的宽度
+      thumbHeight: 0,
+      thumbMoveY: 0
     }
   },
   computed: {
@@ -81,7 +83,8 @@ export default {
     updateThumb () {
       let heightPercentage = (this.wrapper.clientHeight * 100 / this.wrapper.scrollHeight)
       if (heightPercentage < 100) {
-        this.thumb.style.height = heightPercentage + '%'
+        // this.thumb.style.height = heightPercentage + '%'
+        this.thumbHeight = heightPercentage
         this.scrollVisible = true
       } else {
         this.scrollVisible = false
@@ -89,9 +92,10 @@ export default {
     },
     // 处理scroll事件
     handleScroll () {
-      let moveY = (this.wrapper.scrollTop * 100 / this.wrapper.clientHeight)
-      // 通过计算出来的百分比，然后对滚动条执行translate移动
-      this.thumb.style.transform = 'translateY(' + moveY + '%)'
+      // let moveY = (this.wrapper.scrollTop * 100 / this.wrapper.clientHeight)
+      // // 通过计算出来的百分比，然后对滚动条执行translate移动
+      // this.thumb.style.transform = 'translateY(' + moveY + '%)'
+      this.thumbMoveY = this.wrapper.scrollTop * 100 / this.wrapper.clientHeight
     },
     // 处理点击滚动轨道时的click事件
     clickTrackHandle (e) {
@@ -145,7 +149,7 @@ export default {
 
 <style lang="scss" scoped>
 
-.scrollbar-box{
+.scrollbar-box {
   position: relative;
   overflow: hidden;
   height: 100%;
