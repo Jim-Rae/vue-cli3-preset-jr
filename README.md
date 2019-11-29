@@ -20,3 +20,7 @@ vue create --preset direct:https://github.com/Jim-Rae/vue-cli3-preset-jr.git my-
 # 预览
 cd my-project
 npm run serve
+```
+
+## 其他
+如果觉得可以的话，麻烦点一下右上角的小星星作为鼓励，谢谢你喔~(๑˃̵ᴗ˂̵)و
